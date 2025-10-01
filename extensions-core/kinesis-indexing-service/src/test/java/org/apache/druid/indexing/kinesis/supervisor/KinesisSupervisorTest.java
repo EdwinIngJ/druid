@@ -106,6 +106,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -4421,6 +4422,7 @@ public class KinesisSupervisorTest extends EasyMockSupport
             .times(1);
 
     List<Task> postSplitTasks = postSplitCaptured.getValues();
+    postSplitTasks.sort(Comparator.comparing(Task::getId));
     EasyMock.expect(taskQueue.getActiveTasksForDatasource(DATASOURCE)).andReturn(toMap(postSplitTasks)).anyTimes();
     for (Task task : postSplitTasks) {
       EasyMock.expect(taskStorage.getStatus(task.getId()))
@@ -4608,6 +4610,7 @@ public class KinesisSupervisorTest extends EasyMockSupport
             .times(1);
 
     List<Task> postSplitTasks = postSplitCaptured.getValues();
+    postSplitTasks.sort(Comparator.comparing(Task::getId));
     EasyMock.expect(taskQueue.getActiveTasksForDatasource(DATASOURCE)).andReturn(toMap(postSplitTasks)).anyTimes();
     for (Task task : postSplitTasks) {
       EasyMock.expect(taskStorage.getStatus(task.getId()))
