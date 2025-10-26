@@ -44,9 +44,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MovingAverageIterableTest extends InitializedNullHandlingTest
 {
@@ -436,15 +438,19 @@ public class MovingAverageIterableTest extends InitializedNullHandlingTest
     Assert.assertEquals("m", (result.getDimension("gender")).get(0));
     Assert.assertEquals(JAN_2, (result.getTimestamp()));
 
+    Set<String> jan2Injected = new HashSet<>();
+
     Assert.assertTrue(iter.hasNext());
     result = iter.next();
-    Assert.assertEquals("u", (result.getDimension("gender")).get(0));
+    jan2Injected.add((result.getDimension("gender")).get(0));
     Assert.assertEquals(JAN_2, (result.getTimestamp()));
 
     Assert.assertTrue(iter.hasNext());
     result = iter.next();
-    Assert.assertEquals("f", (result.getDimension("gender")).get(0));
+    jan2Injected.add((result.getDimension("gender")).get(0));
     Assert.assertEquals(JAN_2, (result.getTimestamp()));
+
+    Assert.assertEquals(jan2Injected, Set.of("u", "f"));
 
     Assert.assertFalse(iter.hasNext());
   }
@@ -516,15 +522,19 @@ public class MovingAverageIterableTest extends InitializedNullHandlingTest
     Assert.assertEquals("m", (result.getDimension("gender")).get(0));
     Assert.assertEquals(JAN_2, (result.getTimestamp()));
 
+    Set<String> jan2Injected = new HashSet<>();
+
     Assert.assertTrue(iter.hasNext());
     result = iter.next();
-    Assert.assertEquals("u", (result.getDimension("gender")).get(0));
+    jan2Injected.add((result.getDimension("gender")).get(0));
     Assert.assertEquals(JAN_2, (result.getTimestamp()));
 
     Assert.assertTrue(iter.hasNext());
     result = iter.next();
-    Assert.assertEquals("f", (result.getDimension("gender")).get(0));
+    jan2Injected.add((result.getDimension("gender")).get(0));
     Assert.assertEquals(JAN_2, (result.getTimestamp()));
+
+    Assert.assertEquals(jan2Injected, Set.of("u", "f"));
 
     // Jan 3
     Assert.assertTrue(iter.hasNext());
@@ -548,15 +558,19 @@ public class MovingAverageIterableTest extends InitializedNullHandlingTest
     Assert.assertEquals("m", (result.getDimension("gender")).get(0));
     Assert.assertEquals(JAN_4, (result.getTimestamp()));
 
+    Set<String> jan4Injected = new HashSet<>();
+
     Assert.assertTrue(iter.hasNext());
     result = iter.next();
-    Assert.assertEquals("u", (result.getDimension("gender")).get(0));
+    jan4Injected.add((result.getDimension("gender")).get(0));
     Assert.assertEquals(JAN_4, (result.getTimestamp()));
 
     Assert.assertTrue(iter.hasNext());
     result = iter.next();
-    Assert.assertEquals("f", (result.getDimension("gender")).get(0));
+    jan4Injected.add((result.getDimension("gender")).get(0));
     Assert.assertEquals(JAN_4, (result.getTimestamp()));
+
+    Assert.assertEquals(jan4Injected, Set.of("u", "f"));
 
     Assert.assertFalse(iter.hasNext());
   }
